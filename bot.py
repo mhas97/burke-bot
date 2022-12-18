@@ -1,6 +1,7 @@
 import discord
 import dotenv
 import os
+import league_match_service
 
 
 dotenv.load_dotenv()
