@@ -5,9 +5,8 @@ import os
 import json
 from http import HTTPStatus
 
+
 dotenv.load_dotenv()
-
-
 BASE_MATCH_URL = 'https://europe.api.riotgames.com/lol/match/v5/matches'
 API_KEY = os.environ.get("LEAGUE_API_KEY")
 PUUID = os.environ.get("LEAGUE_PUUID")

@@ -10,6 +10,14 @@ dotenv.load_dotenv()
 BOT_TOKEN = os.environ.get("BOT_TOKEN")
 
 
+async def help(message):
+    response = "Currently supported commands ```\n.burke-help\n.latest\n.angry\n.champ-[role]\n.action```"
+    try:
+        await message.channel.send(response)
+    except Exception as e:
+        print(e)
+
+
 async def send_latest(message):
     response = league_service.get_latest_match_bot_string()
     try:
@@ -72,6 +80,9 @@ def run_discord_bot():
             return
 
         message_content = str(message.content).lower()
+
+        if message_content == ".burke-help":
+            await help(message)
 
         if message_content == ".angry":
             await send_angry(message)

@@ -1,5 +1,4 @@
 '''Provides helper methods for any league of legends related data'''
-import dotenv
 import os
 
 
