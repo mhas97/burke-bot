@@ -2,7 +2,7 @@ import requests
 import dotenv
 import os
 import json
-
+from http import HTTPStatus
 
 dotenv.load_dotenv()
 
@@ -12,33 +12,30 @@ API_KEY = os.environ.get("LEAGUE_API_KEY")
 PUUID = os.environ.get("LEAGUE_PUUID")
 
 
-def get_latest_match_id():
-    url = f"https://europe.api.riotgames.com/lol/match/v5/matches/by-puuid/{PUUID}/ids?queue=420&start=0&count=1"
+def get_match_ids(num_matches: int):
+    url = f"https://europe.api.riotgames.com/lol/match/v5/matches/by-puuid/{PUUID}/ids?queue=420&start=0&count={num_matches}"
     api_response = requests.get(url, headers={"X-Riot-Token": API_KEY})
 
     print(f"MATCH-API matches-by-puuid response: {api_response.status_code}")
-    if (api_response.status_code != 200):
-        print("Error accessing MATCH-API")
+    if (api_response.status_code != HTTPStatus.OK):
+        print(
+            f"MATCH-V5 API error {api_response.status_code}: error accessing MATCH-API")
         return None
 
     match_id_list = json.loads(api_response.content.decode())
     print(f"Match list: {match_id_list}")
-    if len(match_id_list) == 0:
-        print("No latest match found")
-        return None
 
-    latest_match_id = match_id_list[0]
-    print(f"Latest match : {latest_match_id}")
-    return latest_match_id
+    return match_id_list
 
 
-def get_match_data_by_id(match_id):
-    url = f"https://europe.api.riotgames.com/lol/match/v5/matches/EUW1_6191702782"
+def get_match_data_by_id(match_id: str):
+    url = f"https://europe.api.riotgames.com/lol/match/v5/matches/{match_id}"
     api_response = requests.get(url, headers={"X-Riot-Token": API_KEY})
 
-    print(f"MATCH-API matches-by-puuid response: {api_response.status_code}")
-    if (api_response.status_code != 200):
-        print("Error accessing MATCH-API")
+    print(f"MATCH-API matches-data-by-id response: {api_response.status_code}")
+    if (api_response.status_code != HTTPStatus.OK):
+        print(
+            f"MATCH-V5 API error {api_response.status_code}: error accessing MATCH-API")
         return None
 
     match_data = json.loads(api_response.content.decode())
