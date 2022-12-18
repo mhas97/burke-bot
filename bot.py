@@ -8,9 +8,18 @@ dotenv.load_dotenv()
 BOT_TOKEN = os.environ.get("BOT_TOKEN")
 
 
-async def send_angry(message):
+async def send_latest(message):
+    latest_match_id = league_match_service.get_latest_match_id()
+    response = league_match_service.get_match_data_by_id(latest_match_id)
     try:
-        response = "Daddy Burke is angry"
+        await message.channel.send(response)
+    except Exception as e:
+        print(e)
+
+
+async def send_angry(message):
+    response = "Daddy Burke is angry"
+    try:
         await message.channel.send(response)
     except Exception as e:
         print(e)
@@ -32,5 +41,8 @@ def run_discord_bot():
 
         if str(message.content) == ".angry":
             await send_angry(message)
+
+        if str(message.content) == ".latest":
+            await send_latest(message)
 
     client.run(BOT_TOKEN)

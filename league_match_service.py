@@ -30,3 +30,17 @@ def get_latest_match_id():
     latest_match_id = match_id_list[0]
     print(f"Latest match : {latest_match_id}")
     return latest_match_id
+
+
+def get_match_data_by_id(match_id):
+    url = f"https://europe.api.riotgames.com/lol/match/v5/matches/EUW1_6191702782"
+    api_response = requests.get(url, headers={"X-Riot-Token": API_KEY})
+
+    print(f"MATCH-API matches-by-puuid response: {api_response.status_code}")
+    if (api_response.status_code != 200):
+        print("Error accessing MATCH-API")
+        return None
+
+    match_data = json.loads(api_response.content.decode())
+    print(f"Match data: {match_data}")
+    return match_data
