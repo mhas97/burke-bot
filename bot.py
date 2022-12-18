@@ -1,7 +1,8 @@
 import discord
 import dotenv
 import os
-import league_match_service
+import league_service
+import random
 
 
 dotenv.load_dotenv()
@@ -9,8 +10,7 @@ BOT_TOKEN = os.environ.get("BOT_TOKEN")
 
 
 async def send_latest(message):
-    latest_match_id = league_match_service.get_latest_match_id()
-    response = league_match_service.get_match_data_by_id(latest_match_id)
+    response = league_service.get_latest_match_bot_string()
     try:
         await message.channel.send(response)
     except Exception as e:
@@ -18,7 +18,19 @@ async def send_latest(message):
 
 
 async def send_angry(message):
-    response = "Daddy Burke is angry"
+    anger = random.randint(0, 100)
+    response = f"Daddy Burke is {anger}% angry"
+    try:
+        await message.channel.send(response)
+    except Exception as e:
+        print(e)
+
+
+async def send_action(message):
+    actions = ["tower-dive", "all in", "recall", "flame team", "flame opponent",
+               "invade", "force drag", "force nash", "roam mid", "roam bot", "buy a pink ward"]
+    action = random.choice(actions)
+    response = f"Burke should {action}"
     try:
         await message.channel.send(response)
     except Exception as e:
@@ -44,5 +56,8 @@ def run_discord_bot():
 
         if str(message.content) == ".latest":
             await send_latest(message)
+
+        if str(message.content) == ".action":
+            await send_action(message)
 
     client.run(BOT_TOKEN)
