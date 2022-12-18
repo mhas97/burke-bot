@@ -37,6 +37,25 @@ async def send_action(message):
         print(e)
 
 
+async def send_champion(message):
+    role = str(message.content[7:])
+    top = ["Kled", "Shaco", "Singed"]
+    jungle = ["Zac", "Shaco"]
+    mid = ["Malzahar", "Kled", "Shaco", "Galio"]
+    if role == "top":
+        role_arr = top
+    elif role == "jungle":
+        role_arr = jungle
+    else:
+        role_arr = mid
+    champion = random.choice(role_arr)
+    response = f"Burke should play {champion} {role}"
+    try:
+        await message.channel.send(response)
+    except Exception as e:
+        print(e)
+
+
 def run_discord_bot():
     intents = discord.Intents.default()
     intents.message_content = True
@@ -51,13 +70,18 @@ def run_discord_bot():
         if message.author == client.user:
             return
 
-        if str(message.content) == ".angry":
+        message_content = str(message.content).lower()
+
+        if message_content == ".angry":
             await send_angry(message)
 
-        if str(message.content) == ".latest":
+        if message_content == ".latest":
             await send_latest(message)
 
-        if str(message.content) == ".action":
+        if message_content == ".action":
             await send_action(message)
+
+        if message_content in [".champ-top", ".champ-jungle", ".champ-mid"]:
+            await send_champion(message, )
 
     client.run(BOT_TOKEN)
