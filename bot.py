@@ -1,3 +1,4 @@
+''' Bot entry-point, checks any messages for a bot-command and executes the assiciated actions'''
 import discord
 import dotenv
 import os

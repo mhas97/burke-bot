@@ -1,8 +1,10 @@
+'''Handles any league of legends related bot calls and returns errors'''
 import match_v5_service
 import league_response_helper
 
 
 def get_latest_match_bot_string():
+    '''Fetches match data for the latest match and returns a formatted bot-string for output'''
     latest_match_id = match_v5_service.get_latest_match_id(num_matches=1)
     if latest_match_id is None:
         return "Error fetching matches"

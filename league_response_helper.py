@@ -1,3 +1,4 @@
+'''Provides helper methods for any league of legends related data'''
 import dotenv
 import os
 
@@ -6,6 +7,7 @@ PUUID = os.environ.get("LEAGUE_PUUID")
 
 
 def get_bot_string_from_match_data(match_data):
+    '''Formats match data into a bot-string for output'''
     participants = match_data["info"]["participants"]
     player_list = [p for p in participants if p["puuid"] == PUUID]
     if (len(player_list) == 0):

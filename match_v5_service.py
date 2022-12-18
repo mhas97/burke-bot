@@ -1,3 +1,4 @@
+'''Responsible for contacting the riot games MATCH-V5 API and logging errors'''
 import requests
 import dotenv
 import os
@@ -13,6 +14,7 @@ PUUID = os.environ.get("LEAGUE_PUUID")
 
 
 def get_match_ids(num_matches: int):
+    '''Returns match ids for a configurable amount of games'''
     url = f"https://europe.api.riotgames.com/lol/match/v5/matches/by-puuid/{PUUID}/ids?queue=420&start=0&count={num_matches}"
     api_response = requests.get(url, headers={"X-Riot-Token": API_KEY})
 
@@ -29,6 +31,7 @@ def get_match_ids(num_matches: int):
 
 
 def get_match_data_by_id(match_id: str):
+    '''Gets match data for a given match id'''
     url = f"https://europe.api.riotgames.com/lol/match/v5/matches/{match_id}"
     api_response = requests.get(url, headers={"X-Riot-Token": API_KEY})
 
