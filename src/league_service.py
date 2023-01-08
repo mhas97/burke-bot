@@ -1,6 +1,6 @@
-'''Handles any league of legends related bot calls and returns errors'''
-import match_v5_service
-import league_response_helper
+'''Handles any League of Legends related bot calls and returns errors'''
+import src.match_v5_service as match_v5_service
+import src.league_response_helper as league_response_helper
 
 
 def get_latest_match_bot_string():
