@@ -25,6 +25,6 @@ def get_bot_string_from_match_data(match_data):
         player["neutralMinionsKilled"]
     game_duration_minutes = match_data["info"]["gameDuration"] / 60
     cs_per_min = round(minions_killed/game_duration_minutes, 2)
-    bot_string = f'Burke {result_string} in a {kills}/{deaths}/{assists} ({kda} kda) performance as {champion_name}. He dealt {damage_dealt} damage to champions and averaged {cs_per_min} minions per minute\n'
+    bot_string = f'Player {result_string} in a {kills}/{deaths}/{assists} ({kda} kda) performance as {champion_name}. He dealt {damage_dealt} damage to champions and averaged {cs_per_min} minions per minute\n'
 
     return bot_string

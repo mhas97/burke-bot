@@ -1,10 +1,12 @@
 # BurkeBot
 
-BurkeBot is a Discord bot that fetches/processes Riot Games API data for output. The eventual goal for this project is to become a generic bot for statistical analysis using data from the MATCH-V5 API by Riot Games
+BurkeBot is a Discord bot that fetches/processes League of Legends API data for output. The project uses Poetry for dependency management, run `poetry install` before running `main.py` via Poetry
 
-#### Currently available commands:
+#### Available commands:
+
 - .burke-help
 - .latest
-- .champ
-- .action
 - .angry
+- .never
+- .action
+- .champ-\[role]

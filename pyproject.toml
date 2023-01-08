@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "burke-bot"
+version = "0.1.0"
+description = "A bot for outputting League of Legends related data via a Discord bot"
+authors = ["Matt Adams <mhas972@gmail.com>"]
+readme = "README.md"
+packages = [{include = "burke_bot"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+python-dotenv = "^0.21.0"
+discord = "^2.1.0"
+requests = "^2.28.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
